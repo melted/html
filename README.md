@@ -1,0 +1,1 @@
+This is a simple library for building HTML docs in C++.

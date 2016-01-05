@@ -94,7 +94,12 @@ tag& operator<<(tag& t, tag&& c) {
     return t;
 }
 
-tag& operator<<(tag& t, attr a) {
+tag& operator<<(tag& t, attr& a) {
+    t.attribute(a);
+    return t;
+}
+
+tag& operator<<(tag& t, attr&& a) {
     t.attribute(a);
     return t;
 }
