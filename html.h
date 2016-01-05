@@ -221,6 +221,14 @@ def_tag(meter)
 def_tag(fieldset)
 def_tag(legend)
 def_tag(details)
+def_tag(summary)
+def_tag(menu)
+def_tag(dialog)
+def_tag(script)
+def_tag(noscript)
+def_tage(template_tag, "template")
+def_tag(canvas)
+
 
 def_ne_tag(base)
 def_ne_tag(meta)
@@ -235,6 +243,7 @@ def_ne_tag(param)
 def_ne_tag(track)
 def_ne_tag(col)
 def_ne_tag(input)
+def_ne_tag(menuitem)
 
 #undef def_tag
 #undef def_tage
