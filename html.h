@@ -94,22 +94,31 @@ tag& operator<<(tag& t, attr a) {
     return t;
 }
 
-#define def_attr(a) \
-attr a(string s)  {\
-    return make_pair(#a, s);\
+#define def_attr(a)              \
+attr a(string s)  {              \
+    return make_pair(#a, s);     \
 }
 
-#define def_tag(t)\
-tag t(vector<attr> attrs, vector<tag> children) { \
-    return tag(#t, attrs, tag::none, children); \
-} \
-\
-tag t(vector<tag> children) {  \
-    return tag(#t, {}, tag::none, children);\
-}\
-\
-tag t() { \
-    return tag(#t, {}, tag::none, {});\
+#define def_tag(t)                                     \
+tag t(vector<attr> attrs, vector<tag> children) {      \
+    return tag(#t, attrs, tag::none, children);        \
+}                                                      \
+                                                       \
+tag t(vector<tag> children) {                          \
+    return tag(#t, {}, tag::none, children);           \
+}                                                      \
+                                                       \
+tag t() {                                              \
+    return tag(#t, {}, tag::none, {});                 \
+}
+
+#define def_ne_tag(t)                                  \
+tag t(vector<attr> attrs) {                            \
+    return tag(#t, attrs, tag::no_end, {});            \
+}                                                      \
+                                                       \
+tag t() {                                              \
+    return tag(#t, {}, tag::no_end, {});               \
 }
 
 // special as class is a c++ keyword
@@ -121,5 +130,18 @@ def_attr(href)
 def_attr(id)
 
 def_tag(html)
+def_tag(head)
+def_tag(body)
 def_tag(div)
+def_tag(h1)
+def_tag(h2)
+def_tag(h3)
+def_tag(h4)
+def_tag(h5)
+def_tag(h6)
+def_tag(b)
+def_tag(i)
+
+def_ne_tag(meta)
+def_ne_tag(link)
 }
