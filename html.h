@@ -38,7 +38,11 @@ struct tag {
         os << "<" << text_;
 
         for(auto a : attrs_) {
-            os << " " << a.first << "=\"" << a.second << "\"";
+            if (a.second != "") {
+                os << " " << a.first << "=\"" << a.second << "\"";
+            } else {
+                os << " " << a.first;
+            }
         }
 
         os << ">";
@@ -125,11 +129,6 @@ tag t(vector<attr> attrs) {                            \
 tag t() {                                              \
     return tag(#t, {}, tag::no_end, {});               \
 }
-
-def_attre(cls, "class")
-
-def_attr(href)
-def_attr(id)
 
 def_tag(html)
 def_tag(head)
@@ -244,6 +243,96 @@ def_ne_tag(track)
 def_ne_tag(col)
 def_ne_tag(input)
 def_ne_tag(menuitem)
+
+
+// Global attributes
+def_attre(cls, "class")
+
+def_attr(accesskey)
+def_attr(contenteditable)
+def_attr(contextmenu)
+def_attr(dir)
+def_attr(draggable)
+def_attr(dropzone)
+def_attr(hidden)
+def_attr(id)
+def_attr(itemid)
+def_attr(itemprop)
+def_attr(itemref)
+def_attr(itemscope)
+def_attr(itemtype)
+def_attr(lang)
+def_attr(spellcheck)
+def_attr(style)
+def_attr(tabindex)
+def_attr(title)
+def_attr(translate)
+def_attr(href)
+
+// Global event handlers
+def_attr(onabort)
+def_attr(onautocomplete)
+def_attr(onautocompleteerror)
+def_attr(onblur)
+def_attr(oncancel)
+def_attr(oncanplay)
+def_attr(oncanplaythrough)
+def_attr(onchange)
+def_attr(onclick)
+def_attr(onclose)
+def_attr(oncontextmenu)
+def_attr(oncuechange)
+def_attr(ondblclick)
+def_attr(ondrag)
+def_attr(ondragend)
+def_attr(ondragenter)
+def_attr(ondragexit)
+def_attr(ondragleave)
+def_attr(ondragover)
+def_attr(ondragstart)
+def_attr(ondrop)
+def_attr(ondurationchange)
+def_attr(onemptied)
+def_attr(onended)
+def_attr(onerror)
+def_attr(onfocus)
+def_attr(oninput)
+def_attr(oninvalid)
+def_attr(onkeydown)
+def_attr(onkeypress)
+def_attr(onkeyup)
+def_attr(onload)
+def_attr(onloadeddata)
+def_attr(onloadedmetadata)
+def_attr(onloadstart)
+def_attr(onmousedown)
+def_attr(onmouseenter)
+def_attr(onmouseleave)
+def_attr(onmousemove)
+def_attr(onmouseout)
+def_attr(onmouseover)
+def_attr(onmouseup)
+def_attr(onwheel)
+def_attr(onpause)
+def_attr(onplay)
+def_attr(onplaying)
+def_attr(onprogress)
+def_attr(onratechange)
+def_attr(onreset)
+def_attr(onresize)
+def_attr(onscroll)
+def_attr(onseeked)
+def_attr(onseeking)
+def_attr(onselect)
+def_attr(onshow)
+def_attr(onsort)
+def_attr(onstalled)
+def_attr(onsubmit)
+def_attr(onsuspend)
+def_attr(ontimeupdate)
+def_attr(ontoggle)
+def_attr(onvolumechange)
+def_attr(onwaiting)
 
 #undef def_tag
 #undef def_tage
