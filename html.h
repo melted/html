@@ -85,23 +85,51 @@ ostream& operator<<(ostream& os, tag&& t) {
 }
 
 tag& operator<<(tag& t, tag& c) {
-    t.add(c);
-    return t;
+    return t.add(c);
 }
 
 tag& operator<<(tag& t, tag&& c) {
-    t.add(c);
-    return t;
+    return t.add(c);
 }
 
 tag& operator<<(tag& t, attr& a) {
-    t.attribute(a);
-    return t;
+    return t.attribute(a);
 }
 
 tag& operator<<(tag& t, attr&& a) {
-    t.attribute(a);
-    return t;
+    return t.attribute(a);
+}
+
+tag& operator<<(tag& t, string s) {
+    return t.add(tag(s));
+}
+
+tag& operator<<(tag& t, const char* s) {
+    return t.add(tag(s));
+}
+
+tag& operator<<(tag&& t, tag& c) {
+    return t.add(c);
+}
+
+tag& operator<<(tag&& t, tag&& c) {
+    return t.add(c);
+}
+
+tag& operator<<(tag&& t, attr& a) {
+    return t.attribute(a);
+}
+
+tag& operator<<(tag&& t, attr&& a) {
+    return t.attribute(a);
+}
+
+tag& operator<<(tag&& t, string s) {
+    return t.add(tag(s));
+}
+
+tag& operator<<(tag&& t, const char* s) {
+    return t.add(tag(s));
 }
 
 #define def_attr(a) def_attre(a, #a)
