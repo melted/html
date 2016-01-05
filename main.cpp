@@ -5,8 +5,11 @@ using namespace html;
 
 int main() {
     auto u =  div({ tag("hello") });
-    tag t("html", { { "href", "http://neon.se" } }, tag::none, { u });
+    u << id("stream") << div({ "attaboy" });
+    auto t = html::html({ href("http://neon.se") }, { u });
 
     std::cout << t << std::endl;
+    std::cout << div({ id("salutation") }, { "howdy" }) << std::endl;
+    std::cout << div({ "Lookit here" }).attribute(id("another")) << std::endl;
     return 0;
 }

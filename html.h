@@ -21,6 +21,7 @@ struct tag {
     tag_opt opts_;
     vector<tag> children_;
 
+    tag(const char* s) : text_(s), opts_(inner_text) {}
     tag(string s) : text_(s), opts_(inner_text) {}
     tag(string t, vector<attr> a, vector<tag> c)
             : text_(t), attrs_(a), opts_(none), children_(c) {}
@@ -56,6 +57,16 @@ struct tag {
     operator string() {
         return render();
     }
+
+    tag& attribute(attr a) {
+        attrs_.push_back(a);
+        return *this;
+    }
+
+    tag& add(tag child) {
+        children_.push_back(child);
+        return *this;
+    }
 };
 
 ostream& operator<<(ostream& os, tag& t) {
@@ -63,12 +74,52 @@ ostream& operator<<(ostream& os, tag& t) {
     return os;
 }
 
-tag div(vector<attr> attrs, vector<tag> children) {
-    return tag("div", attrs, tag::none, children);
+ostream& operator<<(ostream& os, tag&& t) {
+    os << t.render();
+    return os;
 }
 
-tag div(vector<tag> children) {
-    return tag("div", vector<attr>(), tag::none, children);
+tag& operator<<(tag& t, tag& c) {
+    t.add(c);
+    return t;
 }
 
+tag& operator<<(tag& t, tag&& c) {
+    t.add(c);
+    return t;
+}
+
+tag& operator<<(tag& t, attr a) {
+    t.attribute(a);
+    return t;
+}
+
+#define def_attr(a) \
+attr a(string s)  {\
+    return make_pair(#a, s);\
+}
+
+#define def_tag(t)\
+tag t(vector<attr> attrs, vector<tag> children) { \
+    return tag(#t, attrs, tag::none, children); \
+} \
+\
+tag t(vector<tag> children) {  \
+    return tag(#t, {}, tag::none, children);\
+}\
+\
+tag t() { \
+    return tag(#t, {}, tag::none, {});\
+}
+
+// special as class is a c++ keyword
+attr cls(string s) {
+    return make_pair("class", s);
+}
+
+def_attr(href)
+def_attr(id)
+
+def_tag(html)
+def_tag(div)
 }
