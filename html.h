@@ -34,14 +34,15 @@ struct tag {
             return text_;
         }
         ostringstream os;
+        if (text_ != "") {
+            os << "<" << text_;
 
-        os << "<" << text_;
+            for (auto a : attrs_) {
+                os << " " << a.first << "=\"" << a.second << "\"";
+            }
 
-        for(auto a : attrs_) {
-            os << " " << a.first << "=\"" << a.second << "\"";
+            os << ">";
         }
-
-        os << ">";
 
         if (opts_ & no_end) {
             return os.str();
@@ -51,7 +52,9 @@ struct tag {
             os << c.render();
         }
 
-        os << "</" << text_ << ">";
+        if (text_ != "") {
+            os << "</" << text_ << ">";
+        }
         return os.str();
     }
 
