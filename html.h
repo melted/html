@@ -131,23 +131,23 @@ tag& operator<<(tag&& t, const char* s) {
     return t.add(tag(s));
 }
 
-#define def_attr(a) def_attre(a, #a)
+#define def_attr(a) def_attr_ex(a, #a)
 
-#define def_attre(a, n)          \
+#define def_attr_ex(a, n)        \
 attr a(string s)  {              \
     return make_pair(n, s);      \
 }
 
-#define def_bool_attr(a) def_bool_attre(a, #a)
+#define def_bool_attr(a) def_bool_attr_ex(a, #a)
 
-#define def_bool_attre(a, n)     \
+#define def_bool_attr_ex(a, n)   \
 attr a()  {                      \
     return make_pair(n, "");     \
 }
 
-#define def_tag(t)   def_tage(t, #t)
+#define def_tag(t)   def_tag_ex(t, #t)
 
-#define def_tage(t, s)                                 \
+#define def_tag_ex(t, s)                               \
 tag t(vector<attr> attrs, vector<tag> children) {      \
     return tag(s, attrs, tag::none, children);         \
 }                                                      \
@@ -264,7 +264,7 @@ def_tag(menu)
 def_tag(dialog)
 def_tag(script)
 def_tag(noscript)
-def_tage(template_tag, "template")
+def_tag_ex(template_tag, "template")
 def_tag(canvas)
 
 
@@ -285,7 +285,7 @@ def_ne_tag(menuitem)
 
 
 // Global attributes
-def_attre(cls, "class")
+def_attr_ex(cls, "class")
 
 def_attr(accesskey)
 def_attr(contenteditable)
@@ -374,10 +374,10 @@ def_attr(onwaiting)
 
 // tag attributes
 
-def_attre(http_equiv, "http-equiv")
-def_attre(accept_charset, "accept-charset")
-def_attre(forc, "for")
-def_bool_attre(default_attr, "default")
+def_attr_ex(http_equiv, "http-equiv")
+def_attr_ex(accept_charset, "accept-charset")
+def_attr_ex(forc, "for")
+def_bool_attr_ex(default_attr, "default")
 
 def_attr(manifest)
 def_attr(href)
@@ -495,10 +495,10 @@ def_attr(onunhandledrejection)
 def_attr(onunload)
 
 #undef def_tag
-#undef def_tage
+#undef def_tag_ex
 #undef def_attr
-#undef def_attre
+#undef def_attr_ex
 #undef def_bool_attr
-#undef def_bool_attre
+#undef def_bool_attr_ex
 #undef def_ne_tag
 }
