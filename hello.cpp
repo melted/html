@@ -1,10 +1,10 @@
 #include <iostream>
 #include "html.h"
 
-using namespace html;
+using namespace htm;
 
 int main() {
-    std::cout << (html::html() <<
+    std::cout << (html() <<
             (div() << id("mydiv") << p({"hello, world!"}))) << std::endl;
     return 0;
 }
