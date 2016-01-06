@@ -38,11 +38,7 @@ struct tag {
         os << "<" << text_;
 
         for(auto a : attrs_) {
-            if (a.second != "") {
-                os << " " << a.first << "=\"" << a.second << "\"";
-            } else {
-                os << " " << a.first;
-            }
+            os << " " << a.first << "=\"" << a.second << "\"";
         }
 
         os << ">";
