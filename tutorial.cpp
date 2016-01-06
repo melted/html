@@ -66,4 +66,5 @@ int main() {
     // accept-charset    accept_charset
     // default           default_attr
     // template          template_tag
+    // main              main_tag    (not illegal to keep, but inconvenient)
 }
