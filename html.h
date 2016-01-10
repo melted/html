@@ -133,26 +133,27 @@ tag& operator<<(tag&& t, const char* s) {
 
 #define def_attr(a) def_attr_ex(a, #a)
 
-#define def_attr_ex(a, n)        \
+#define def_attr_ex(a, n)             \
 attr a(std::string s)  {              \
     return std::make_pair(n, s);      \
 }
 
 #define def_bool_attr(a) def_bool_attr_ex(a, #a)
 
-#define def_bool_attr_ex(a, n)   \
-attr a()  {                      \
+#define def_bool_attr_ex(a, n)        \
+attr a()  {                           \
     return std::make_pair(n, "");     \
 }
 
 #define def_tag(t)   def_tag_ex(t, #t)
 
 #define def_tag_ex(t, s)                               \
-tag t(std::vector<attr> attrs, std::vector<tag> children) {      \
+tag t(std::vector<attr> attrs,                         \
+           std::vector<tag> children) {                \
     return tag(s, attrs, tag::none, children);         \
 }                                                      \
                                                        \
-tag t(std::vector<tag> children) {                          \
+tag t(std::vector<tag> children) {                     \
     return tag(s, {}, tag::none, children);            \
 }                                                      \
                                                        \
@@ -161,7 +162,7 @@ tag t() {                                              \
 }
 
 #define def_ne_tag(t)                                  \
-tag t(std::vector<attr> attrs) {                            \
+tag t(std::vector<attr> attrs) {                       \
     return tag(#t, attrs, tag::no_end, {});            \
 }                                                      \
                                                        \
