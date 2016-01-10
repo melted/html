@@ -83,51 +83,23 @@ std::ostream& operator<<(std::ostream& os, tag&& t) {
     return os;
 }
 
-tag& operator<<(tag& t, tag& c) {
+template<typename Tag>
+Tag& operator<<(Tag&& t, Tag&& c) {
     return t.add(c);
 }
 
-tag& operator<<(tag& t, tag&& c) {
-    return t.add(c);
-}
-
-tag& operator<<(tag& t, attr& a) {
+template<typename Tag>
+Tag& operator<<(Tag&& t, attr a) {
     return t.attribute(a);
 }
 
-tag& operator<<(tag& t, attr&& a) {
-    return t.attribute(a);
-}
-
-tag& operator<<(tag& t, std::string s) {
+template <typename Tag>
+Tag& operator<<(Tag&& t, std::string s) {
     return t.add(tag(s));
 }
 
-tag& operator<<(tag& t, const char* s) {
-    return t.add(tag(s));
-}
-
-tag& operator<<(tag&& t, tag& c) {
-    return t.add(c);
-}
-
-tag& operator<<(tag&& t, tag&& c) {
-    return t.add(c);
-}
-
-tag& operator<<(tag&& t, attr& a) {
-    return t.attribute(a);
-}
-
-tag& operator<<(tag&& t, attr&& a) {
-    return t.attribute(a);
-}
-
-tag& operator<<(tag&& t, std::string s) {
-    return t.add(tag(s));
-}
-
-tag& operator<<(tag&& t, const char* s) {
+template <typename Tag>
+Tag& operator<<(Tag&& t, const char* s) {
     return t.add(tag(s));
 }
 
