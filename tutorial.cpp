@@ -7,6 +7,7 @@
 // the library defines a massive amount of names, including favorites like i and
 // b.
 using namespace htm;
+using namespace std;
 
 int main() {
     // The html is built from a class called tag, it includes the tag text

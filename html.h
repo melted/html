@@ -9,32 +9,31 @@
 
 namespace htm {
 
-namespace {
-    using namespace std;
-}
 
-using attr = pair<string, string>;
+using attr = std::pair<std::string, std::string>;
 
 struct tag {
     enum tag_opt { none = 0, no_end = 1, inner_text = 2 };
-    string text_;
-    std::map<string, string> attrs_;
+
+    std::string text_;
+    std::map<std::string, std::string> attrs_;
+
     tag_opt opts_;
-    vector<tag> children_;
+    std::vector<tag> children_;
 
     tag() : text_(""), opts_(none) {}
     tag(const char* s) : text_(s), opts_(inner_text) {}
-    tag(string s) : text_(s), opts_(inner_text) {}
-    tag(string t, vector<attr> a, vector<tag> c)
-            : text_(t), attrs_(a.begin(), a.end()), opts_(none), children_(c) { }
-    tag(string t, vector<attr> a, tag_opt o, vector<tag> c)
+    tag(std::string s) : text_(s), opts_(inner_text) {}
+    tag(std::string t, std::vector<attr> a, std::vector<tag> c)
+            : text_(t), attrs_(a.begin(), a.end()), opts_(none), children_(c) {}
+    tag(std::string t, std::vector<attr> a, tag_opt o, std::vector<tag> c)
     : text_(t), attrs_(a.begin(), a.end()), opts_(o), children_(c) {}
 
-    string render() {
+    std::string render() {
         if (opts_ & inner_text) {
             return text_;
         }
-        ostringstream os;
+        std::ostringstream os;
         if (text_ != "") {
             os << "<" << text_;
 
@@ -59,7 +58,7 @@ struct tag {
         return os.str();
     }
 
-    operator string() {
+    operator std::string() {
         return render();
     }
 
@@ -74,12 +73,12 @@ struct tag {
     }
 };
 
-ostream& operator<<(ostream& os, tag& t) {
+std::ostream& operator<<(std::ostream& os, tag& t) {
     os << t.render();
     return os;
 }
 
-ostream& operator<<(ostream& os, tag&& t) {
+std::ostream& operator<<(std::ostream& os, tag&& t) {
     os << t.render();
     return os;
 }
@@ -100,7 +99,7 @@ tag& operator<<(tag& t, attr&& a) {
     return t.attribute(a);
 }
 
-tag& operator<<(tag& t, string s) {
+tag& operator<<(tag& t, std::string s) {
     return t.add(tag(s));
 }
 
@@ -124,7 +123,7 @@ tag& operator<<(tag&& t, attr&& a) {
     return t.attribute(a);
 }
 
-tag& operator<<(tag&& t, string s) {
+tag& operator<<(tag&& t, std::string s) {
     return t.add(tag(s));
 }
 
@@ -135,25 +134,25 @@ tag& operator<<(tag&& t, const char* s) {
 #define def_attr(a) def_attr_ex(a, #a)
 
 #define def_attr_ex(a, n)        \
-attr a(string s)  {              \
-    return make_pair(n, s);      \
+attr a(std::string s)  {              \
+    return std::make_pair(n, s);      \
 }
 
 #define def_bool_attr(a) def_bool_attr_ex(a, #a)
 
 #define def_bool_attr_ex(a, n)   \
 attr a()  {                      \
-    return make_pair(n, "");     \
+    return std::make_pair(n, "");     \
 }
 
 #define def_tag(t)   def_tag_ex(t, #t)
 
 #define def_tag_ex(t, s)                               \
-tag t(vector<attr> attrs, vector<tag> children) {      \
+tag t(std::vector<attr> attrs, std::vector<tag> children) {      \
     return tag(s, attrs, tag::none, children);         \
 }                                                      \
                                                        \
-tag t(vector<tag> children) {                          \
+tag t(std::vector<tag> children) {                          \
     return tag(s, {}, tag::none, children);            \
 }                                                      \
                                                        \
@@ -162,7 +161,7 @@ tag t() {                                              \
 }
 
 #define def_ne_tag(t)                                  \
-tag t(vector<attr> attrs) {                            \
+tag t(std::vector<attr> attrs) {                            \
     return tag(#t, attrs, tag::no_end, {});            \
 }                                                      \
                                                        \
